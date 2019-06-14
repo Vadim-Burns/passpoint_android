@@ -1,4 +1,4 @@
-package com.example.passpoint;
+package com.passpoint.passpoint;
 
 import org.junit.Test;
 
