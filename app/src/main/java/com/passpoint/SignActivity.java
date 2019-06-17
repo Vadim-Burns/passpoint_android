@@ -54,7 +54,7 @@ public class SignActivity extends AppCompatActivity {
         DrawingView signView = findViewById(R.id.sign);
         byte[] sign = signView.getSign();
 
-        Send send = new Send(getMacAddr().hashCode(), 1, name[1], name[0], name[2], sign);
+        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[0], name[2], sign);
 
         new SendTask().doInBackground(send);
 

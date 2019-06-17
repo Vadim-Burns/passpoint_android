@@ -18,11 +18,11 @@ public class Send {
         }
     }
 
-    public long IdDevice;
-    public long place;
+    public String IdDevice;
+    public String place;
     public Person person;
 
-    public Send(long idDevice, long place, String firstName, String middleName, String lastName, byte[] sign) {
+    public Send(String idDevice, String place, String firstName, String middleName, String lastName, byte[] sign) {
         this.IdDevice = idDevice;
         this.place = place;
         this.person = new Person(firstName, middleName, lastName, sign);

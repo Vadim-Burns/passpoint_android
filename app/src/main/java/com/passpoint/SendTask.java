@@ -37,7 +37,7 @@ public class SendTask extends AsyncTask<Send, Void, Void> {
         params.put("firstName", send.person.firstName);
         params.put("middleName", send.person.middleName);
         params.put("lastName", send.person.lastName);
-        params.put("Place", "0");
+        params.put("Place", send.place);
         params.put("IdDevice", send.IdDevice);
         params.put("signature", Arrays.toString(send.person.signature));
 
