@@ -9,6 +9,11 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -27,13 +32,14 @@ public class SendTask extends AsyncTask<Send, Void, Void> {
 
         Log.w(TAG, gson.toJson(send));
 
+
         RequestParams params = new RequestParams();
         params.put("firstName", send.person.firstName);
         params.put("middleName", send.person.middleName);
         params.put("lastName", send.person.lastName);
         params.put("Place", "0");
         params.put("IdDevice", "1");
-        params.put("signature", new ByteArrayInputStream(send.person.signature));
+        params.put("signature", Arrays.toString(send.person.signature));
 
         client.post(addr, params, new AsyncHttpResponseHandler() {
 
