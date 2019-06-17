@@ -23,7 +23,7 @@ public class Send {
     public Person person;
 
     public Send(long idDevice, long place, String firstName, String middleName, String lastName, byte[] sign) {
-        IdDevice = idDevice;
+        this.IdDevice = idDevice;
         this.place = place;
         this.person = new Person(firstName, middleName, lastName, sign);
     }
