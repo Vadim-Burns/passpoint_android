@@ -1,6 +1,5 @@
 package com.passpoint;
 
-import java.util.HashMap;
 
 public class Send {
 
