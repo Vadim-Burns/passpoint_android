@@ -2,8 +2,12 @@
     <string name="app_name">passpoint</string>
     <string name="next_button_rus">подписать</string>
     <string name="next_button_eng">sign</string>
-    <string name="name">ФИО</string>
-    <string name="send_sign">готово</string>
+    <string name="name_rus">Сюда введите свою полное ФИО</string>
+    <string name="name_eng">Английской версии пока нет</string>
+    <string name="hint_rus">Оставьте свою подпись на поле в черной рамке</string>
+    <string name="hint_eng">Leave your signature in a black frame</string>
+    <string name="send_sign_rus">готово</string>
+    <string name="send_sign_eng">OK</string>
     <string name="rules_rus">"Правила посещения ЦОД КРОК\n"
                 "1) Запрещается нахождение на территории ЦОД без размещённого на видном месте магнитного пропуска с бейджем и лентой.\n"
                 "2) Запрещается проход через двери, оборудованные СКУД, без прикладывания магнитного пропуска.\n"

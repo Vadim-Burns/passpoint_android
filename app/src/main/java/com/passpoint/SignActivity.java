@@ -4,16 +4,20 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -32,6 +36,46 @@ public class SignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.w(TAG, "onCreate");
         setContentView(R.layout.activity_sign);
+
+        //customize action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setLogo(R.mipmap.croc_logo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setTitle("");
+        actionBar.setBackgroundDrawable(new ColorDrawable(0xFF0000));
+
+        //set language
+        final String hint;
+        if (MainActivity.lang == "RU") {
+            EditText editText = (EditText) findViewById(R.id.name_edittext);
+            editText.setHint(getResources().getString(R.string.name_rus));
+
+            hint = getResources().getString(R.string.hint_rus);
+
+            Button button = (Button) findViewById(R.id.sendSign);
+            button.setText(getResources().getString(R.string.send_sign_rus));
+        } else {
+            EditText editText = (EditText) findViewById(R.id.name_edittext);
+            editText.setHint(getResources().getString(R.string.name_eng));
+
+            hint = getResources().getString(R.string.hint_eng);
+
+            Button button = (Button) findViewById(R.id.sendSign);
+            button.setText(getResources().getString(R.string.send_sign_eng));
+        }
+
+        //showing toast for 5 seconds
+        new CountDownTimer(4000, 900) {
+            @Override
+            public void onTick(long l) {
+                Toast.makeText(getApplicationContext(), hint, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFinish() {
+            }
+        }.start();
     }
 
     @Override
@@ -47,19 +91,20 @@ public class SignActivity extends AppCompatActivity {
         String[] name = editText.getText().toString().split(" ");
 
         if (name.length != 3) {
-            Toast.makeText(this, "Введите полное ФИО!", Toast.LENGTH_LONG).show();
+            if (MainActivity.lang == "RU") Toast.makeText(this, "Введите полное ФИО!", Toast.LENGTH_LONG).show();
+            else Toast.makeText(this, "Enter full name!", Toast.LENGTH_LONG).show();
             return;
         }
 
-        DrawingView signView = findViewById(R.id.sign);
+        DrawingView signView = findViewById(R.id.sign_view);
         byte[] sign = signView.getSign();
 
         Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[0], name[2], sign);
 
         new SendTask().doInBackground(send);
 
-        if (!isOnline()) Toast.makeText(this, "Нет интернет соединения.\nПодпись будет отправлена когда соединение появится", Toast.LENGTH_LONG).show();
-        else Toast.makeText(this, "Подпись была отправлена", Toast.LENGTH_LONG).show();
+//        if (!isOnline()) Toast.makeText(this, "Нет интернет соединения.\nПодпись будет отправлена когда соединение появится", Toast.LENGTH_LONG).show();
+//        else Toast.makeText(this, "Подпись была отправлена", Toast.LENGTH_LONG).show();
 
 
         new Handler().postDelayed(new Runnable() {

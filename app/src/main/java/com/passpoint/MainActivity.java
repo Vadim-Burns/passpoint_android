@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private static PdfRenderer pdfRenderer;
     private static String url = "https://firebasestorage.googleapis.com/v0/b/passpointandroid.appspot.com/o/doc.pdf?alt=media&token=71fba9a9-0e4d-44f0-a28b-7120a9bbd1aa";
     private static String path;
-    private static String lang = "RU";
+    protected static String lang = "RU";
 
 
     @Override
@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        getSupportActionBar().hide();
 
+        //customize action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setLogo(R.mipmap.croc_logo);
         actionBar.setDisplayUseLogoEnabled(true);
@@ -64,57 +64,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
-//            Log.w(TAG, "Not granted");
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.INTERNET}, 1);
-//        }
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//            finish();
-//        }
-//
-//        Log.w(TAG, "Access granted");
-//
-//        //getting path to our document
-//        path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/" + FileName;
-//        Log.w(TAG, "Absolute path to file: " + path);
-//
-//        try {
-//
-//            File pdffile = new File(path);
-//            pdfRenderer = new PdfRenderer(ParcelFileDescriptor.open(pdffile, ParcelFileDescriptor.MODE_READ_ONLY));
-//
-//        } catch (FileNotFoundException e) {
-//            Log.w(TAG, "File doesn't exists");
-//
-//            if (isOnline()) Toast.makeText(this, "Документ отсутствует.\nПожалуйста подождите. Когда он будет скачен, перезапустите приложение", Toast.LENGTH_LONG).show();
-//            else Toast.makeText(this, "Документ отсутствует.\nБез доступа к сети скачать документ невозможно", Toast.LENGTH_LONG).show();
-//
-//            getDoc();
-//
-//            try {
-//                //new try to get document
-//                File pdffile = new File(path);
-//                pdfRenderer = new PdfRenderer(ParcelFileDescriptor.open(pdffile, ParcelFileDescriptor.MODE_READ_ONLY));
-//            } catch (FileNotFoundException error) {
-//                Log.w(TAG, "File not found the second time");
-//            } catch (IOException error) {
-//                Log.w(TAG, e.getMessage());
-//            }
-//        } catch (IOException e) {
-//            Log.w(TAG, e.getMessage());
-//        }
-//
-//        try {
-//            Bitmap bitmap = Bitmap.createBitmap(this.getResources().getDisplayMetrics().widthPixels + 10, this.getResources().getDisplayMetrics().heightPixels + 10, Bitmap.Config.ARGB_8888);
-//
-//            pdfRenderer.openPage(0).render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
-//
-//            Log.w(TAG, "setting bitmap");
-//            ImageView imageView = findViewById(R.id.pdf_view);
-//            imageView.setImageBitmap(bitmap);
-//        } catch (Exception e) {
-//            Log.e(TAG, e.getMessage());
-//        }
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED)) {
+            Log.w(TAG, "Not granted");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.INTERNET}, 1);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
+            Log.e(TAG, "Finishing because access not granted");
+            finish();
+        }
     }
 
 
