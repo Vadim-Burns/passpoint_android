@@ -4,12 +4,24 @@
     android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <TextView
+        android:id="@+id/rules_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="@string/rules_title_rus"
+        android:textColor="@color/colorBlack"
+        android:textAlignment="center"/>
+
 
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_below="@id/rules_title"
         android:layout_above="@id/sign_activity_button"
+        android:layout_marginTop="4dp"
         android:orientation="vertical" >
 
     <TextView
@@ -17,9 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:layout_marginLeft="6dp"
         android:text="@string/rules_rus"
-        android:textSize="28sp"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textSize="24sp"
+        android:textColor="@color/colorBlack"/>
 
     </ScrollView>
 
@@ -30,6 +43,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:onClick="sign"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorWhite"
         android:text="@string/next_button_rus"/>
 
 </RelativeLayout>

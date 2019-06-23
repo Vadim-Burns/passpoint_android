@@ -1,24 +1,21 @@
 package com.passpoint;
 
-import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.os.CountDownTimer;
+import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.passpoint.passpoint.R;
@@ -37,6 +34,7 @@ public class SignActivity extends AppCompatActivity {
         Log.w(TAG, "onCreate");
         setContentView(R.layout.activity_sign);
 
+
         //customize action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setLogo(R.mipmap.croc_logo);
@@ -45,37 +43,54 @@ public class SignActivity extends AppCompatActivity {
         actionBar.setTitle("");
         actionBar.setBackgroundDrawable(new ColorDrawable(0xFF0000));
 
+        //creating dialog window
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         //set language
         final String hint;
         if (MainActivity.lang == "RU") {
             EditText editText = (EditText) findViewById(R.id.name_edittext);
             editText.setHint(getResources().getString(R.string.name_rus));
 
-            hint = getResources().getString(R.string.hint_rus);
-
             Button button = (Button) findViewById(R.id.sendSign);
             button.setText(getResources().getString(R.string.send_sign_rus));
+            TextView hintSign = findViewById(R.id.hint_sign);
+            hintSign.setText(getResources().getString(R.string.hint_sign_rus));
+
+            builder.setMessage(getResources().getString(R.string.hint_rus));
         } else {
             EditText editText = (EditText) findViewById(R.id.name_edittext);
             editText.setHint(getResources().getString(R.string.name_eng));
 
-            hint = getResources().getString(R.string.hint_eng);
-
             Button button = (Button) findViewById(R.id.sendSign);
             button.setText(getResources().getString(R.string.send_sign_eng));
+            TextView hintSign = findViewById(R.id.hint_sign);
+            hintSign.setText(getResources().getString(R.string.hint_sign_eng));
+
+            builder.setMessage(getResources().getString(R.string.hint_eng));
         }
 
-        //showing toast for 5 seconds
-        new CountDownTimer(4000, 900) {
+        //show dialog window
+        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void onTick(long l) {
-                Toast.makeText(getApplicationContext(), hint, Toast.LENGTH_LONG).show();
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
             }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
-            @Override
-            public void onFinish() {
-            }
-        }.start();
+        //showing toast for 5 seconds
+//        new CountDownTimer(4000, 900) {
+//            @Override
+//            public void onTick(long l) {
+//                Toast.makeText(getApplicationContext(), hint, Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//            }
+//        }.start();
     }
 
     @Override
@@ -90,7 +105,7 @@ public class SignActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.name_edittext);
         String[] name = editText.getText().toString().split(" ");
 
-        if (name.length != 3) {
+        if (name.length < 2) {
             if (MainActivity.lang == "RU") Toast.makeText(this, "Введите полное ФИО!", Toast.LENGTH_LONG).show();
             else Toast.makeText(this, "Enter full name!", Toast.LENGTH_LONG).show();
             return;
@@ -103,8 +118,9 @@ public class SignActivity extends AppCompatActivity {
 
         new SendTask().doInBackground(send);
 
-//        if (!isOnline()) Toast.makeText(this, "Нет интернет соединения.\nПодпись будет отправлена когда соединение появится", Toast.LENGTH_LONG).show();
-//        else Toast.makeText(this, "Подпись была отправлена", Toast.LENGTH_LONG).show();
+        if (!isOnline())
+            Toast.makeText(this, "Нет интернет соединения.\nПодпись будет отправлена когда соединение появится", Toast.LENGTH_LONG).show();
+        else Toast.makeText(this, "Подпись была отправлена", Toast.LENGTH_LONG).show();
 
 
         new Handler().postDelayed(new Runnable() {
