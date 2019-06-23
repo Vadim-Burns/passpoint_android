@@ -20,7 +20,7 @@ import cz.msebera.android.httpclient.Header;
 public class SendTask extends AsyncTask<Send, Void, Void> {
     static AsyncHttpClient client = new AsyncHttpClient(8080);
     static String TAG = "SendLog";
-    static final String addr = "http://81.23.11.22/api/add_note";
+    static final String addr = "http://192.168.0.35/api/add_note";
 
     @Override
     protected Void doInBackground(Send... sends) {

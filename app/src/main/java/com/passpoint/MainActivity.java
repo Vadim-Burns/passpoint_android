@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.pdf.PdfRenderer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,9 +15,13 @@ import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private static PdfRenderer pdfRenderer;
     private static String url = "https://firebasestorage.googleapis.com/v0/b/passpointandroid.appspot.com/o/doc.pdf?alt=media&token=71fba9a9-0e4d-44f0-a28b-7120a9bbd1aa";
     private static String path;
+    private static String lang = "RU";
 
 
     @Override
@@ -44,7 +50,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setLogo(R.mipmap.croc_logo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setTitle("");
+        actionBar.setBackgroundDrawable(new ColorDrawable(0xFF0000));
+
 
 
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
@@ -100,8 +114,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static String getUrl() {
-        return url;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_button, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle button activities
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.mybutton) {
+            if (lang == "RU") {
+                item.setIcon(R.drawable.eng_button);
+                lang = "ENG";
+            } else {
+                item.setIcon(R.drawable.ru_button);
+                lang = "RU";
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getDoc() {
