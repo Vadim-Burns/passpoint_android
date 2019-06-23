@@ -5,20 +5,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <ImageView
-        android:id="@+id/pdf_view"
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/sign_activity_button"
+        android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/rules_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbarAlwaysDrawVerticalTrack="true"/>
+        android:layout_height="wrap_content"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:text="@string/rules_rus"
+        android:textSize="28sp"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    </ScrollView>
 
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/sign_activity_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="-1dp"
         android:onClick="sign"
-        android:text="@string/next_button"/>
+        android:text="@string/next_button_rus"/>
 
 </RelativeLayout>

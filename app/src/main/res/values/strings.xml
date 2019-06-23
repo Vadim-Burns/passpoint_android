@@ -1,6 +1,47 @@
 <resources>
     <string name="app_name">passpoint</string>
-    <string name="next_button">подписать</string>
+    <string name="next_button_rus">подписать</string>
+    <string name="next_button_eng">sign</string>
     <string name="name">ФИО</string>
     <string name="send_sign">готово</string>
+    <string name="rules_rus">"Правила посещения ЦОД КРОК\n"
+                "1) Запрещается нахождение на территории ЦОД без размещённого на видном месте магнитного пропуска с бейджем и лентой.\n"
+                "2) Запрещается проход через двери, оборудованные СКУД, без прикладывания магнитного пропуска.\n"
+                "3) Запрещается производить фотосъёмку на территории ЦОД без согласования с персоналом ЦОД.\n"
+                "4) Запрещается любое воздействие на дверной механизм, приводящее к его некорректной работе.\n"
+                "5) При обнаружении пожара или признаков горения (задымление, запах гари, повышение температуры и т.п.), срабатывании пожарной сигнализации, необходимо незамедлительно покинуть здание в соответствии с планом эвакуации и с соблюдением мер личной безопасности.\n"
+                "6) Запрещается нахождение в машинных залах ЦОД в грязной обуви.\n"
+                "7) Запрещается проход в машинные залы ЦОД в верхней одежде.\n"
+                "8) Запрещается внос в машинные залы ЦОД:\n"
+                "a. горючей тары;\n"
+                "b. жидкостей и продуктов питания;\n"
+                "c. оборудования и комплектующих без согласования с персоналом ЦОД;\n"
+                "d. сумок, рюкзаков, портфелей.\n"
+                "9) Запрещается оставлять упаковку от оборудования и комплектующих на территории ЦОД.\n"
+                "10) Запрещается нахождение в нетрезвом состоянии и курение на территории ЦОД.\n"
+                "11) Запрещается доступ к оборудованию других Заказчиков.\n"
+                "12) Запрещается оставлять открытыми двери в горячие/холодные коридоры, находясь в машинном зале ЦОД, а также перед выходом из машинного зала ЦОД.\n"
+                "\n"
+                "Если возникают нестандартные ситуации или появляются вопросы, просьба обращаться к сотрудникам ЦОД, находящимся поблизости, либо по телефону:\n"
+                "+7(495) 926-88-56."</string>
+    <string name="rules_eng">"Terms of visiting Croc Data Center\n"
+                "1) Do not pass at the data center territory without magnetic passcard with neckband in sight.\n"
+                "2) Do not pass through the doors with access control system without applying magnetic passcard.\n"
+                "3) Do not take photos at the data center territory without agreement with data center staff.\n"
+                "4) Do not perform any action with door mechanism leading to its incorrect operation.\n"
+                "5) Upon detection of a fire or signs of combustion (smoke, burning smell, temperature increase, etc.) or fire alarm, you must immediately leave the building according to the evacuation plan in compliance with the measures of personal security.\n"
+                "6) Do not stay in data center computer room in dirty shoes.\n"
+                "7) Do not pass in data center computer room in street clothes.\n"
+                "8) Do not bring in data center computer room:\n"
+                "a. flammable containers;\n"
+                "b. liquid and food;\n"
+                "c. equipment and components without agreement with data center staff;\n"
+                "d. bags, backpacks, briefcases.\n"
+                "9) Do not leave the package of equipment and components at the data center territory.\n"
+                "10) Do not smoke and do not be drunk at the data center territory. \n"
+                "11) Do not access to equipment of other data center Customers.\n"
+                "12) Do not leave the doors open in hot/cold aisles while being in the data center computer room and before living the data center computer room.\n"
+                "\n"
+                "If you have any questions or unusual situations, please contact the data center staff nearby, or by phone:\n"
+                "+7(495) 926-88-56."</string>
 </resources>
