@@ -20,7 +20,9 @@ import android.widget.Toast;
 
 import com.passpoint.passpoint.R;
 
+import java.io.File;
 import java.net.NetworkInterface;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -111,10 +113,16 @@ public class SignActivity extends AppCompatActivity {
             return;
         }
 
-        DrawingView signView = findViewById(R.id.sign_view);
-        byte[] sign = signView.getSign();
+        //if middleName doesn't exists
+        if (name.length == 2) {
+            name = Arrays.copyOf(name, name.length + 1);
+            name[name.length - 1] = "-";
+        }
 
-        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[0], name[2], sign);
+        Log.w(TAG, "Getting Sign");
+        DrawingView signView = findViewById(R.id.sign_view);
+
+        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[0], name[2], signView.getSign());
 
         new SendTask().doInBackground(send);
 

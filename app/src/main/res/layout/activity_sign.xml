@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/hint_sign"
@@ -23,7 +24,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/hint_sign"
         android:layout_above="@id/sendSign"
-        android:background="@drawable/border"/>
+        android:background="@drawable/border" />
 
     <Button
         android:id="@+id/sendSign"

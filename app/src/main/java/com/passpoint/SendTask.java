@@ -8,6 +8,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
@@ -15,7 +16,7 @@ import cz.msebera.android.httpclient.Header;
 public class SendTask extends AsyncTask<Send, Void, Void> {
     static AsyncHttpClient client = new AsyncHttpClient(8080);
     static String TAG = "SendLog";
-    static final String addr = "http://81.23.11.22/api/add_note";
+    static final String addr = "http://10.10.6.124/api/add_note";
 
     @Override
     protected Void doInBackground(Send... sends) {
@@ -34,7 +35,11 @@ public class SendTask extends AsyncTask<Send, Void, Void> {
         params.put("lastName", send.person.lastName);
         params.put("Place", send.place);
         params.put("IdDevice", send.IdDevice);
-        params.put("signature", Arrays.toString(send.person.signature));
+        try {
+            params.put("signature", send.person.signature);
+        } catch (FileNotFoundException e) {
+            Log.e(TAG, "FileNotFound");
+        }
 
         client.post(addr, params, new AsyncHttpResponseHandler() {
 

@@ -7,12 +7,19 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.media.ThumbnailUtils;
+import android.os.Environment;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class DrawingView extends View {
 
@@ -167,17 +174,29 @@ public class DrawingView extends View {
         return true;
     }
 
-    public byte[] getSign()
-    {
+    public File getSign() {
+        String TAG = "DrawLog";
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+
         Bitmap bitmap = getDrawingCache();
 
         bitmap = ThumbnailUtils.extractThumbnail(bitmap, 256, 256);
 
+        File file = new File(path, "Sign.png");
 
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, out);
-        byte[] sign = out.toByteArray();
+        try {
+            Log.w(TAG, "Absolute path to file: " + path);
+            file.createNewFile();
+            OutputStream out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100  , out);
+            out.flush();
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        return sign;
+        return file;
     }
 }
