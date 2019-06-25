@@ -122,13 +122,22 @@ public class SignActivity extends AppCompatActivity {
         Log.w(TAG, "Getting Sign");
         DrawingView signView = findViewById(R.id.sign_view);
 
-        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[0], name[2], signView.getSign());
+        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[2], name[0], signView.getSign());
 
         new SendTask().doInBackground(send);
 
-        if (!isOnline())
-            Toast.makeText(this, "Нет интернет соединения.\nПодпись будет отправлена когда соединение появится", Toast.LENGTH_LONG).show();
-        else Toast.makeText(this, "Подпись была отправлена", Toast.LENGTH_LONG).show();
+
+        //result of sending
+        String mes = "";
+        if (!isOnline()) {
+            if (MainActivity.lang == "RU") mes = getResources().getString(R.string.connection_error_rus);
+            else mes = getResources().getString(R.string.connection_error_eng);
+        }
+        else {
+            if (MainActivity.lang == "RU") mes = getResources().getString(R.string.send_ok_rus);
+            else mes = getResources().getString(R.string.send_ok_eng);
+        }
+        Toast.makeText(this, mes, Toast.LENGTH_LONG).show();
 
 
         new Handler().postDelayed(new Runnable() {

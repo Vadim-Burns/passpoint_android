@@ -50,7 +50,6 @@ public class SendTask extends AsyncTask<Send, Void, Void> {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
-                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                 Log.e(TAG, String.valueOf(statusCode));
             }
         });

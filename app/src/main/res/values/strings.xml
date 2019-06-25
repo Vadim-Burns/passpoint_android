@@ -3,11 +3,15 @@
     <string name="next_button_rus">подписать</string>
     <string name="next_button_eng">sign</string>
     <string name="name_rus">Сюда введите свою полное ФИО</string>
-    <string name="name_eng">Английской версии пока нет</string>
+    <string name="name_eng">Enter your last name, first name, middle name(if you have)</string>
     <string name="hint_rus">1. Введите ПОЛНОЕ ФИО в верхнюю строку\n2. Оставьте свою подпись на поле в черной рамке</string>
     <string name="hint_eng">1. Enter your Last Name, First Name and Middle Name(if you have) in the top line\n2. Enter your sign in the bordered place</string>
     <string name="hint_sign_rus">Подпишитесь в области ниже:</string>
     <string name="hint_sign_eng">Sign in place below:</string>
+    <string name="connection_error_rus">Нет интернет соединения.\nПодпись будет отправлена позже</string>
+    <string name="connection_error_eng">Internet connection error.\nSign will be sent later</string>
+    <string name="send_ok_rus">Подпись была отправлена</string>
+    <string name="send_ok_eng">Sign has been sent</string>
     <string name="send_sign_rus">готово</string>
     <string name="send_sign_eng">OK</string>
     <string name="rules_title_rus">Правила посещения ЦОД КРОК</string>

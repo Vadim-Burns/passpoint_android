@@ -40,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle("");
         actionBar.setBackgroundDrawable(new ColorDrawable(0xFF0000));
 
+        TextView rules_title = (TextView) findViewById(R.id.rules_title);
+        TextView rules = (TextView) findViewById(R.id.rules_view);
+        Button button = (Button) findViewById(R.id.sign_activity_button);
+
+        if (lang == "RU") {
+            rules_title.setText(getResources().getString(R.string.rules_title_rus));
+            rules.setText(getResources().getString(R.string.rules_rus));
+            button.setText(getResources().getString(R.string.next_button_rus));
+        } else {
+            rules_title.setText(getResources().getString(R.string.rules_title_eng));
+            rules.setText(getResources().getString(R.string.rules_eng));
+            button.setText(getResources().getString(R.string.next_button_eng));
+        }
+
 
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             Log.w(TAG, "Not granted");
