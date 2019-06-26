@@ -81,6 +81,8 @@ public class SignActivity extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTextSize(24);
 
         //showing toast for 5 seconds
 //        new CountDownTimer(4000, 900) {
