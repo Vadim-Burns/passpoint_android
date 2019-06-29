@@ -87,17 +87,6 @@ public class SignActivity extends AppCompatActivity {
         TextView textView = (TextView) dialog.findViewById(android.R.id.message);
         textView.setTextSize(24);
 
-        //showing toast for 5 seconds
-//        new CountDownTimer(4000, 900) {
-//            @Override
-//            public void onTick(long l) {
-//                Toast.makeText(getApplicationContext(), hint, Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//            }
-//        }.start();
     }
 
     @Override
@@ -121,13 +110,6 @@ public class SignActivity extends AppCompatActivity {
             else {
                 toast = Toast.makeText(this, "Enter full name!", Toast.LENGTH_LONG);
             }
-
-            //making toast's font bigger
-            LinearLayout toastLayout = (LinearLayout) toast.getView();
-            TextView toastTV = (TextView) toastLayout.getChildAt(0);
-            toastTV.setTextSize(TypedValue.COMPLEX_UNIT_PX, 30);
-            toast.show();
-
             return;
         }
 
@@ -155,11 +137,6 @@ public class SignActivity extends AppCompatActivity {
             if (MainActivity.lang == "RU") mes = getResources().getString(R.string.send_ok_rus);
             else mes = getResources().getString(R.string.send_ok_eng);
         }
-        Toast.makeText(this, mes, Toast.LENGTH_LONG).show();
-        RelativeLayout toastLayout = (RelativeLayout) toast.getView();
-        TextView toastTV = (TextView) toastLayout.getChildAt(0);
-        toastTV.setTextSize(25);
-        toast.show();
 
 
         new Handler().postDelayed(new Runnable() {
