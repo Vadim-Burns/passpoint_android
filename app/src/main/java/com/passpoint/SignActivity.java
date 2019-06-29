@@ -12,9 +12,12 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -109,9 +112,22 @@ public class SignActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.name_edittext);
         String[] name = editText.getText().toString().split(" ");
 
+        Toast toast = null;
         if (name.length < 2) {
-            if (MainActivity.lang == "RU") Toast.makeText(this, "Введите полное ФИО!", Toast.LENGTH_LONG).show();
-            else Toast.makeText(this, "Enter full name!", Toast.LENGTH_LONG).show();
+            Log.e(TAG, "name is too short");
+            if (MainActivity.lang == "RU") {
+                toast = Toast.makeText(this, "Введите полное ФИО!", Toast.LENGTH_LONG);
+            }
+            else {
+                toast = Toast.makeText(this, "Enter full name!", Toast.LENGTH_LONG);
+            }
+
+            //making toast's font bigger
+            LinearLayout toastLayout = (LinearLayout) toast.getView();
+            TextView toastTV = (TextView) toastLayout.getChildAt(0);
+            toastTV.setTextSize(TypedValue.COMPLEX_UNIT_PX, 30);
+            toast.show();
+
             return;
         }
 
@@ -140,6 +156,10 @@ public class SignActivity extends AppCompatActivity {
             else mes = getResources().getString(R.string.send_ok_eng);
         }
         Toast.makeText(this, mes, Toast.LENGTH_LONG).show();
+        RelativeLayout toastLayout = (RelativeLayout) toast.getView();
+        TextView toastTV = (TextView) toastLayout.getChildAt(0);
+        toastTV.setTextSize(25);
+        toast.show();
 
 
         new Handler().postDelayed(new Runnable() {

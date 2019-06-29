@@ -18,7 +18,7 @@ import cz.msebera.android.httpclient.Header;
 public class SendTask extends AsyncTask<Send, Void, Void> {
     static AsyncHttpClient client = new AsyncHttpClient(8080);
     static String TAG = "SendLog";
-    static final String addr = "http://10.10.6.124/api/add_note";
+    static final String addr = "http://5.8.180.39/api/add_note";
 
     @Override
     protected Void doInBackground(Send... sends) {
@@ -43,22 +43,33 @@ public class SendTask extends AsyncTask<Send, Void, Void> {
             Log.e(TAG, "FileNotFound");
         }
 
-        while(true) {
-            CustomAsyncHttpResponseHandler customAsyncHttpResponseHandler = new CustomAsyncHttpResponseHandler();
-            client.post(addr, params, customAsyncHttpResponseHandler);
-            break;
-//            try {
-//                TimeUnit.SECONDS.sleep(30);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            if (customAsyncHttpResponseHandler.statusCode == 1) {
-//                Log.e(TAG, "Trying again");
-//                break;
-//            } else {
-//                Log.w(TAG, "It's okay");
-//            }
-        }
+        client.post(addr, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                Log.w(TAG, String.valueOf(statusCode));
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e(TAG, String.valueOf(statusCode));
+            }
+        });
+//        while(true) {
+//            CustomAsyncHttpResponseHandler customAsyncHttpResponseHandler = new CustomAsyncHttpResponseHandler();
+//            client.post(addr, params, customAsyncHttpResponseHandler);
+//            break;
+////            try {
+////                TimeUnit.SECONDS.sleep(30);
+////            } catch (InterruptedException e) {
+////                e.printStackTrace();
+////            }
+////            if (customAsyncHttpResponseHandler.statusCode == 1) {
+////                Log.e(TAG, "Trying again");
+////                break;
+////            } else {
+////                Log.w(TAG, "It's okay");
+////            }
+//        }
 
         return null;
     }
