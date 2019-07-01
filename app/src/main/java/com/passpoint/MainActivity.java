@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -34,21 +35,25 @@ public class MainActivity extends AppCompatActivity {
 
         //customize action bar
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setLogo(R.mipmap.croc_logo);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setTitle("");
-        actionBar.setBackgroundDrawable(new ColorDrawable(0xFF0000));
+        actionBar.hide();
+//        actionBar.setLogo(R.drawable.ic_action_croc);
+//        actionBar.setDisplayUseLogoEnabled(true);
+//        actionBar.setDisplayShowHomeEnabled(true);
+//        actionBar.setTitle("");
+//        actionBar.setBackgroundDrawable(new ColorDrawable(0xFF0000));
 
         TextView rules_title = (TextView) findViewById(R.id.rules_title);
         TextView rules = (TextView) findViewById(R.id.rules_view);
         Button button = (Button) findViewById(R.id.sign_activity_button);
+        ImageView lang_button = (ImageView) findViewById(R.id.lang_button);
 
         if (lang == "RU") {
+            lang_button.setImageResource(R.drawable.ru_button);
             rules_title.setText(getResources().getString(R.string.rules_title_rus));
             rules.setText(getResources().getString(R.string.rules_rus));
             button.setText(getResources().getString(R.string.next_button_rus));
         } else {
+            lang_button.setImageResource(R.drawable.eng_button);
             rules_title.setText(getResources().getString(R.string.rules_title_eng));
             rules.setText(getResources().getString(R.string.rules_eng));
             button.setText(getResources().getString(R.string.next_button_eng));
@@ -66,56 +71,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_button, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    // handle button activities
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.mybutton) {
-            if (lang == "RU") {
-                TextView rules_textview = (TextView) findViewById(R.id.rules_view);
-                rules_textview.setText(getResources().getString(R.string.rules_eng));
-
-                TextView rules_title_textview = (TextView) findViewById(R.id.rules_title);
-                rules_title_textview.setText(getResources().getString(R.string.rules_title_eng));
-
-                Button button = (Button) findViewById(R.id.sign_activity_button);
-                button.setText(getResources().getString(R.string.next_button_eng));
-
-                item.setIcon(R.drawable.eng_button);
-
-                lang = "ENG";
-            } else {
-                TextView rules_textview = (TextView) findViewById(R.id.rules_view);
-                rules_textview.setText(getResources().getString(R.string.rules_rus));
-
-                TextView rules_title_textview = (TextView) findViewById(R.id.rules_title);
-                rules_title_textview.setText(getResources().getString(R.string.rules_title_rus));
-
-                Button button = (Button) findViewById(R.id.sign_activity_button);
-                button.setText(getResources().getString(R.string.next_button_rus));
-
-                item.setIcon(R.drawable.ru_button);
-
-                lang = "RU";
-            }
-            ScrollView scrollView = (ScrollView) findViewById(R.id.scrollview);
-            scrollView.scrollTo(0, 0);
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public void sign(View view) {
         Log.w(TAG, "next_button has been pressed");
 
         Intent intent = new Intent(this, SignActivity.class);
         startActivity(intent);
+    }
+
+    public void changeLang(View view) {
+
+        ImageView lang_button = (ImageView) findViewById(R.id.lang_button);
+
+        if (lang == "RU") {
+            TextView rules_textview = (TextView) findViewById(R.id.rules_view);
+            rules_textview.setText(getResources().getString(R.string.rules_eng));
+
+            TextView rules_title_textview = (TextView) findViewById(R.id.rules_title);
+            rules_title_textview.setText(getResources().getString(R.string.rules_title_eng));
+
+            Button button = (Button) findViewById(R.id.sign_activity_button);
+            button.setText(getResources().getString(R.string.next_button_eng));
+
+            lang_button.setImageResource(R.drawable.eng_button);
+
+            lang = "ENG";
+        } else {
+            TextView rules_textview = (TextView) findViewById(R.id.rules_view);
+            rules_textview.setText(getResources().getString(R.string.rules_rus));
+
+            TextView rules_title_textview = (TextView) findViewById(R.id.rules_title);
+            rules_title_textview.setText(getResources().getString(R.string.rules_title_rus));
+
+            Button button = (Button) findViewById(R.id.sign_activity_button);
+            button.setText(getResources().getString(R.string.next_button_rus));
+
+            lang_button.setImageResource(R.drawable.ru_button);
+
+            lang = "RU";
+        }
+        ScrollView scrollView = (ScrollView) findViewById(R.id.scrollview);
+        scrollView.scrollTo(0, 0);
     }
 }
 

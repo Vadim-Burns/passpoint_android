@@ -2,17 +2,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:paddingLeft="6sp"
+    android:paddingRight="6sp">
+
+    <RelativeLayout
+        android:id="@+id/images_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingTop="10sp"
+        android:paddingLeft="15sp"
+        android:paddingRight="15sp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8sp"
+            android:src="@drawable/croc_logo"/>
+
+        <ImageView
+            android:id="@+id/lang_button"
+            android:layout_width="55sp"
+            android:layout_height="45sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:onClick="changeLang"/>
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/rules_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/images_relative"
         android:textSize="24sp"
         android:textStyle="bold"
         android:text="@string/rules_title_rus"
         android:textColor="@color/colorBlack"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
 
     <ScrollView
@@ -24,15 +52,15 @@
         android:layout_marginTop="4dp"
         android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/rules_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:layout_marginLeft="6dp"
-        android:text="@string/rules_rus"
-        android:textSize="24sp"
-        android:textColor="@color/colorBlack"/>
+        <TextView
+            android:id="@+id/rules_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:layout_marginLeft="6dp"
+            android:text="@string/rules_rus"
+            android:textSize="24sp"
+            android:textColor="@color/colorBlack"/>
 
     </ScrollView>
 
@@ -43,8 +71,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:onClick="sign"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/button"
         android:textColor="@color/colorWhite"
-        android:text="@string/next_button_rus"/>
+        android:text="@string/next_button_rus" />
 
 </RelativeLayout>

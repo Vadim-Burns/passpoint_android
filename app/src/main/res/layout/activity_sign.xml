@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content">
+    android:layout_width="wrap_content"
+    android:paddingLeft="6sp"
+    android:paddingRight="6sp">
 
-    <EditText
-        android:id="@+id/name_edittext"
-        android:layout_width="match_parent"
+    <!--<EditText-->
+        <!--android:id="@+id/name_edittext"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:maxLines="1"-->
+        <!--android:singleLine="true"-->
+        <!--android:textSize="25sp"/>-->
+
+    <ImageView
+        android:id="@+id/sign_logo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textSize="25sp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="15sp"
+        android:src="@drawable/croc_logo"/>
+
+    <com.passpoint.DrawingView
+        android:id="@+id/name_drawview"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/border"
+        android:layout_below="@id/sign_logo"/>
 
     <TextView
         android:id="@+id/hint_sign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name_edittext"
+        android:layout_below="@id/name_drawview"
         android:textColor="@color/colorBlack"
         android:textSize="20sp"/>
 
@@ -35,7 +55,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:onClick="sendSign"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/button"
         android:textColor="@color/colorWhite"/>
 
 </RelativeLayout>

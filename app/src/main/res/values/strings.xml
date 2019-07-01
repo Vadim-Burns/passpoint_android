@@ -2,7 +2,6 @@
     <string name="app_name">passpoint</string>
     <string name="next_button_rus">подписать</string>
     <string name="next_button_eng">sign</string>
-    <string name="name_rus">Сюда введите свою полное ФИО</string>
     <string name="name_eng">Enter your last name, first name, middle name(if you have)</string>
     <string name="hint_rus">1. Введите ПОЛНОЕ ФИО в верхнюю строку\n2. Оставьте свою подпись на поле в черной рамке</string>
     <string name="hint_eng">1. Enter your Last Name, First Name and Middle Name(if you have) in the top line\n2. Enter your sign in the bordered place</string>

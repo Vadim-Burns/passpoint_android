@@ -6,15 +6,17 @@ import java.io.File;
 public class Send {
 
     class Person {
-        public String firstName;
-        public String middleName;
-        public String lastName;
+//        public String firstName;
+//        public String middleName;
+//        public String lastName;
+        public File name;
         public File signature;
 
-        public Person(String firstName, String middleName, String lastName, File signature) {
-            this.firstName = firstName;
-            this.middleName = middleName;
-            this.lastName = lastName;
+        public Person(File name, File signature) {
+//            this.firstName = firstName;
+//            this.middleName = middleName;
+//            this.lastName = lastName;
+            this.name = name;
             this.signature = signature;
         }
     }
@@ -23,9 +25,9 @@ public class Send {
     public String place;
     public Person person;
 
-    public Send(String idDevice, String place, String firstName, String middleName, String lastName, File sign) {
+    public Send(String idDevice, String place, File name, File signature) {
         this.IdDevice = idDevice;
         this.place = place;
-        this.person = new Person(firstName, middleName, lastName, sign);
+        this.person = new Person(name, signature);
     }
 }

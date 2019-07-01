@@ -42,11 +42,12 @@ public class SignActivity extends AppCompatActivity {
 
         //customize action bar
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setLogo(R.mipmap.croc_logo);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setTitle("");
-        actionBar.setBackgroundDrawable(new ColorDrawable(0xFF0000));
+        actionBar.hide();
+//        actionBar.setLogo(R.drawable.ic_action_croc);
+//        actionBar.setDisplayUseLogoEnabled(true);
+//        actionBar.setDisplayShowHomeEnabled(true);
+//        actionBar.setTitle("");
+//        actionBar.setBackgroundDrawable(new ColorDrawable(0xFF0000));
 
         //creating dialog window
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -54,8 +55,8 @@ public class SignActivity extends AppCompatActivity {
         //set language
         final String hint;
         if (MainActivity.lang == "RU") {
-            EditText editText = (EditText) findViewById(R.id.name_edittext);
-            editText.setHint(getResources().getString(R.string.name_rus));
+//            EditText editText = (EditText) findViewById(R.id.name_edittext);
+//            editText.setHint(getResources().getString(R.string.name_rus));
 
             Button button = (Button) findViewById(R.id.sendSign);
             button.setText(getResources().getString(R.string.send_sign_rus));
@@ -64,8 +65,8 @@ public class SignActivity extends AppCompatActivity {
 
             builder.setMessage(getResources().getString(R.string.hint_rus));
         } else {
-            EditText editText = (EditText) findViewById(R.id.name_edittext);
-            editText.setHint(getResources().getString(R.string.name_eng));
+//            EditText editText = (EditText) findViewById(R.id.name_edittext);
+//            editText.setHint(getResources().getString(R.string.name_eng));
 
             Button button = (Button) findViewById(R.id.sendSign);
             button.setText(getResources().getString(R.string.send_sign_eng));
@@ -98,32 +99,36 @@ public class SignActivity extends AppCompatActivity {
 
     public void sendSign(View view) {
 
-        EditText editText = findViewById(R.id.name_edittext);
-        String[] name = editText.getText().toString().split(" ");
+//        EditText editText = findViewById(R.id.name_edittext);
+//        String[] name = editText.getText().toString().split(" ");
 
         Toast toast = null;
-        if (name.length < 2) {
-            Log.e(TAG, "name is too short");
-            if (MainActivity.lang == "RU") {
-                toast = Toast.makeText(this, "Введите полное ФИО!", Toast.LENGTH_LONG);
-            }
-            else {
-                toast = Toast.makeText(this, "Enter full name!", Toast.LENGTH_LONG);
-            }
-            return;
-        }
+//        if (name.length < 2) {
+//            Log.e(TAG, "name is too short");
+//            if (MainActivity.lang == "RU") {
+//                toast = Toast.makeText(this, "Введите полное ФИО!", Toast.LENGTH_LONG);
+//            }
+//            else {
+//                toast = Toast.makeText(this, "Enter full name!", Toast.LENGTH_LONG);
+//            }
+//            return;
+//        }
+//
+//        //if middleName doesn't exists
+//        if (name.length == 2) {
+//            name = Arrays.copyOf(name, name.length + 1);
+//            name[name.length - 1] = "-";
+//        }
 
-        //if middleName doesn't exists
-        if (name.length == 2) {
-            name = Arrays.copyOf(name, name.length + 1);
-            name[name.length - 1] = "-";
-        }
+        Log.w(TAG, "Getting name");
+        DrawingView nameView = findViewById(R.id.name_drawview);
 
         Log.w(TAG, "Getting Sign");
         DrawingView signView = findViewById(R.id.sign_view);
 
-        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[2], name[0], signView.getSign());
-
+//        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[2], name[0], signView.getSign());
+        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", nameView.getImage(1050, 110), signView.getImage(256, 256));
+//
         new SendTask().doInBackground(send);
 
 

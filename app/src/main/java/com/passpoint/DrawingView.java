@@ -24,7 +24,7 @@ import java.io.OutputStream;
 public class DrawingView extends View {
 
     public int width;
-    public  int height;
+    public int height;
     private Bitmap mBitmap;
     private Canvas mCanvas;
     private Path mPath;
@@ -33,6 +33,8 @@ public class DrawingView extends View {
     private Paint circlePaint;
     private Path circlePath;
     private Paint mPaint;
+    private int StrokeWidth = 6;
+    private static int name = 427202149;
 
     public DrawingView(Context c) {
         super(c);
@@ -53,7 +55,7 @@ public class DrawingView extends View {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeWidth(12);
+        mPaint.setStrokeWidth(StrokeWidth);
         setDrawingCacheEnabled(true);
     }
 
@@ -76,7 +78,7 @@ public class DrawingView extends View {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeWidth(12);
+        mPaint.setStrokeWidth(StrokeWidth);
         setDrawingCacheEnabled(true);
     }
 
@@ -99,7 +101,7 @@ public class DrawingView extends View {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeWidth(12);
+        mPaint.setStrokeWidth(StrokeWidth);
         setDrawingCacheEnabled(true);
     }
 
@@ -174,15 +176,16 @@ public class DrawingView extends View {
         return true;
     }
 
-    public File getSign() {
+    public File getImage(int width, int height) {
         String TAG = "DrawLog";
         String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
 
         Bitmap bitmap = getDrawingCache();
 
-        bitmap = ThumbnailUtils.extractThumbnail(bitmap, 256, 256);
+        bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height);
 
-        File file = new File(path, "Sign.png");
+        File file = new File(path, String.valueOf(name) + ".png");
+        name += 1;
 
         try {
             Log.w(TAG, "Absolute path to file: " + path);
