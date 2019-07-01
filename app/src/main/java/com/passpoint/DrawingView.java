@@ -35,6 +35,7 @@ public class DrawingView extends View {
     private Paint mPaint;
     private int StrokeWidth = 6;
     private static int name = 427202149;
+    private boolean touched = false;
 
     public DrawingView(Context c) {
         super(c);
@@ -156,6 +157,7 @@ public class DrawingView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        this.touched = true;
         float x = event.getX();
         float y = event.getY();
 
@@ -201,5 +203,9 @@ public class DrawingView extends View {
         }
 
         return file;
+    }
+
+    public boolean isTouched() {
+        return touched;
     }
 }

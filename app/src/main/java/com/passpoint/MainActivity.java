@@ -3,15 +3,12 @@ package com.passpoint;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -48,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
         ImageView lang_button = (ImageView) findViewById(R.id.lang_button);
 
         if (lang == "RU") {
-            lang_button.setImageResource(R.drawable.ru_button);
+            lang_button.setImageResource(R.drawable.lang_ru);
             rules_title.setText(getResources().getString(R.string.rules_title_rus));
             rules.setText(getResources().getString(R.string.rules_rus));
             button.setText(getResources().getString(R.string.next_button_rus));
         } else {
-            lang_button.setImageResource(R.drawable.eng_button);
+            lang_button.setImageResource(R.drawable.lang_eng);
             rules_title.setText(getResources().getString(R.string.rules_title_eng));
             rules.setText(getResources().getString(R.string.rules_eng));
             button.setText(getResources().getString(R.string.next_button_eng));
@@ -92,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             Button button = (Button) findViewById(R.id.sign_activity_button);
             button.setText(getResources().getString(R.string.next_button_eng));
 
-            lang_button.setImageResource(R.drawable.eng_button);
+            lang_button.setImageResource(R.drawable.lang_eng);
 
             lang = "ENG";
         } else {
@@ -105,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             Button button = (Button) findViewById(R.id.sign_activity_button);
             button.setText(getResources().getString(R.string.next_button_rus));
 
-            lang_button.setImageResource(R.drawable.ru_button);
+            lang_button.setImageResource(R.drawable.lang_ru);
 
             lang = "RU";
         }
