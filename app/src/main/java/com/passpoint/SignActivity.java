@@ -15,6 +15,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,7 +41,13 @@ public class SignActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.w(TAG, "onCreate");
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign);
+
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
 
 
         //customize action bar
@@ -62,6 +70,8 @@ public class SignActivity extends AppCompatActivity {
 
             Button sendSign = (Button) findViewById(R.id.sendSign);
             sendSign.setText(getResources().getString(R.string.send_sign_rus));
+            Button back = (Button) findViewById(R.id.back_button);
+            back.setText(getResources().getString(R.string.back_button_rus));
             ImageView clear_button = (ImageView) findViewById(R.id.clear_button);
             clear_button.setImageResource(R.drawable.clear_rus);
             TextView hintName = findViewById(R.id.hint_name);
@@ -76,6 +86,8 @@ public class SignActivity extends AppCompatActivity {
 
             Button sendSign = (Button) findViewById(R.id.sendSign);
             sendSign.setText(getResources().getString(R.string.send_sign_eng));
+            Button back = (Button) findViewById(R.id.back_button);
+            back.setText(getResources().getString(R.string.back_button_eng));
             ImageView clear_button = (ImageView) findViewById(R.id.clear_button);
             clear_button.setImageResource(R.drawable.clear_eng);
             TextView hintName = findViewById(R.id.hint_name);
@@ -86,17 +98,19 @@ public class SignActivity extends AppCompatActivity {
             builder.setMessage(getResources().getString(R.string.hint_eng));
         }
 
-        //show dialog window
-        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-        textView.setTextSize(24);
+        if (getIntent().getStringExtra("Info").equals("yes")) {
+            //show dialog window
+            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+            textView.setTextSize(24);
+        }
 
     }
 
@@ -157,9 +171,9 @@ public class SignActivity extends AppCompatActivity {
         }
 
 //        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[2], name[0], signView.getSign());
-        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", nameView.getImage(1050, 110), signView.getImage(256, 256));
+        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", nameView.getImage(1050, 275), signView.getImage(256, 256));
 //
-        new SendTask().doInBackground(send);
+//        new SendTask().doInBackground(send);
 
 
         //result of sending
@@ -222,6 +236,13 @@ public class SignActivity extends AppCompatActivity {
 
     public void clearAll(View view) {
         Intent intent = new Intent(this, SignActivity.class);
+        intent.putExtra("Info", "no");
         startActivity(intent);
+    }
+
+    public void backPressed(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
