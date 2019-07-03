@@ -180,9 +180,9 @@ public class SignActivity extends AppCompatActivity {
         }
 
 //        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[2], name[0], signView.getSign());
-        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", nameView.getImage(1050, 275), signView.getImage(256, 256));
+        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", nameView.getImage(1050, 570), signView.getImage(256, 256));
 //
-//        new SendTask().doInBackground(send);
+        new SendTask().doInBackground(send);
 
 
         //result of sending
