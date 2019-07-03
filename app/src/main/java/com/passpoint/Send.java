@@ -6,16 +6,10 @@ import java.io.File;
 public class Send {
 
     class Person {
-//        public String firstName;
-//        public String middleName;
-//        public String lastName;
         public File name;
         public File signature;
 
         public Person(File name, File signature) {
-//            this.firstName = firstName;
-//            this.middleName = middleName;
-//            this.lastName = lastName;
             this.name = name;
             this.signature = signature;
         }

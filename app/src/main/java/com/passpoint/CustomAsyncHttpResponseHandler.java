@@ -10,7 +10,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import cz.msebera.android.httpclient.Header;
 

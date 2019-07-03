@@ -28,68 +28,80 @@ import java.util.List;
 public class SignActivity extends AppCompatActivity {
 
     private static String TAG = "SignLog";
+    private static int nameWidth = 1050;
+    private static int nameHeight = 600;
+    private static int signWidth = 400;
+    private static int signHeight = 300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.w(TAG, "onCreate");
+
+        //hidding title
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign);
 
+        //hidding movebar
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
 
 
-        //customize action bar
+        //hidding action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
         //creating dialog window
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        //set language
-        final String hint;
+        //getting parts of the layout, where there is a text
+        Button sendSign = (Button) findViewById(R.id.sendSign);
+        Button back_button = (Button) findViewById(R.id.back_button);
+        ImageView clear_button = (ImageView) findViewById(R.id.clear_button);
+        TextView hintName = findViewById(R.id.hint_name);
+        TextView hintSign = findViewById(R.id.hint_sign);
+
+        //setting language
         if (MainActivity.lang == "RU") {
 
-            Button sendSign = (Button) findViewById(R.id.sendSign);
             sendSign.setText(getResources().getString(R.string.send_sign_rus));
             sendSign.setTypeface(MainActivity.boldFont);
-            Button back = (Button) findViewById(R.id.back_button);
-            back.setText(getResources().getString(R.string.back_button_rus));
-            back.setTypeface(MainActivity.boldFont);
-            ImageView clear_button = (ImageView) findViewById(R.id.clear_button);
+
+            back_button.setText(getResources().getString(R.string.back_button_rus));
+            back_button.setTypeface(MainActivity.boldFont);
+
             clear_button.setImageResource(R.drawable.clear_rus);
-            TextView hintName = findViewById(R.id.hint_name);
+
             hintName.setText(getResources().getString(R.string.hint_name_rus));
             hintName.setTypeface(MainActivity.smallFont);
-            TextView hintSign = findViewById(R.id.hint_sign);
+
             hintSign.setText(getResources().getString(R.string.hint_sign_rus));
             hintSign.setTypeface(MainActivity.smallFont);
 
             builder.setMessage(getResources().getString(R.string.hint_rus));
         } else {
 
-            Button sendSign = (Button) findViewById(R.id.sendSign);
             sendSign.setText(getResources().getString(R.string.send_sign_eng));
             sendSign.setTypeface(MainActivity.boldFont);
-            Button back = (Button) findViewById(R.id.back_button);
-            back.setText(getResources().getString(R.string.back_button_eng));
-            back.setTypeface(MainActivity.boldFont);
-            ImageView clear_button = (ImageView) findViewById(R.id.clear_button);
+
+            back_button.setText(getResources().getString(R.string.back_button_eng));
+            back_button.setTypeface(MainActivity.boldFont);
+
             clear_button.setImageResource(R.drawable.clear_eng);
-            TextView hintName = findViewById(R.id.hint_name);
             hintName.setText(getResources().getString(R.string.hint_name_eng));
             hintName.setTypeface(MainActivity.smallFont);
-            TextView hintSign = findViewById(R.id.hint_sign);
+
             hintSign.setText(getResources().getString(R.string.hint_sign_eng));
             hintSign.setTypeface(MainActivity.smallFont);
 
             builder.setMessage(getResources().getString(R.string.hint_eng));
         }
 
+        //if intent param "Info" is yes, AlertDialog with info will be shown
+        //it is created for clearAll function
         if (getIntent().getStringExtra("Info").equals("yes")) {
+
             //show dialog window
             builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                 @Override
@@ -99,9 +111,11 @@ public class SignActivity extends AppCompatActivity {
             });
             AlertDialog dialog = builder.create();
             dialog.show();
-            TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-            textView.setTextSize(24);
-            textView.setTypeface(MainActivity.smallFont);
+
+            //setting fontSize of AlertDialog window
+            TextView alertDialogTextView = (TextView) dialog.findViewById(android.R.id.message);
+            alertDialogTextView.setTextSize(24);
+            alertDialogTextView.setTypeface(MainActivity.smallFont);
         }
 
     }
@@ -115,72 +129,61 @@ public class SignActivity extends AppCompatActivity {
 
     public void sendSign(View view) {
 
-//        EditText editText = findViewById(R.id.name_edittext);
-//        String[] name = editText.getText().toString().split(" ");
-
         Toast toast = null;
-//        if (name.length < 2) {
-//            Log.e(TAG, "name is too short");
-//            if (MainActivity.lang == "RU") {
-//                toast = Toast.makeText(this, "Введите полное ФИО!", Toast.LENGTH_LONG);
-//            }
-//            else {
-//                toast = Toast.makeText(this, "Enter full name!", Toast.LENGTH_LONG);
-//            }
-//            return;
-//        }
-//
-//        //if middleName doesn't exists
-//        if (name.length == 2) {
-//            name = Arrays.copyOf(name, name.length + 1);
-//            name[name.length - 1] = "-";
-//        }
 
-
-        Log.w(TAG, "Getting name");
         DrawingView nameView = findViewById(R.id.name_drawview);
-
-        Log.w(TAG, "Getting Sign");
         DrawingView signView = findViewById(R.id.sign_view);
 
-        String mes = "";
+        //Toast to remember filling name
+        String mes;
         if (!nameView.isTouched()) {
+
+            //setting language
             if (MainActivity.lang== "RU") mes = getResources().getString(R.string.noname_rus);
             else mes = getResources().getString(R.string.noname_eng);
-            toast = Toast.makeText(this, mes, Toast.LENGTH_LONG);
-//            toast.setGravity(Gravity.CENTER,0,0);
-            toast.show();
+
+            Toast.makeText(this, mes, Toast.LENGTH_LONG).show();
             return;
+
         }
 
+        //Toast to remember filling signature
         if (!signView.isTouched()) {
+
+            //setting language
             if (MainActivity.lang== "RU") mes = getResources().getString(R.string.nosign_rus);
             else mes = getResources().getString(R.string.nosign_eng);
-            toast = Toast.makeText(this, mes, Toast.LENGTH_LONG);
-//            toast.setGravity(Gravity.CENTER,0,0);
-            toast.show();
+
+            Toast.makeText(this, mes, Toast.LENGTH_LONG).show();
             return;
         }
 
-//        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", name[1], name[2], name[0], signView.getSign());
-        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", nameView.getImage(1050, 570), signView.getImage(256, 256));
-//
+
+        Log.w(TAG, "Starting SendTask");
+        //creating AsyncTask to sent Send
+        Send send = new Send(String.valueOf(getMacAddr().hashCode()), "1", nameView.getImage(nameWidth, nameHeight), signView.getImage(signWidth, signHeight));
         new SendTask().doInBackground(send);
 
 
-        //result of sending
-        mes = "";
+        //result of checking access to internet
         if (!isOnline()) {
+
+            //setting language
             if (MainActivity.lang == "RU") mes = getResources().getString(R.string.connection_error_rus);
             else mes = getResources().getString(R.string.connection_error_eng);
+
         }
         else {
+
+            //setting language
             if (MainActivity.lang == "RU") mes = getResources().getString(R.string.send_ok_rus);
             else mes = getResources().getString(R.string.send_ok_eng);
+
         }
         Toast.makeText(this, mes, Toast.LENGTH_LONG).show();
 
 
+        //back to MainActivity is delayed, because user have to look at info toast about result of sending
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -201,6 +204,8 @@ public class SignActivity extends AppCompatActivity {
         }
     }
 
+
+    //stackoverflow :D
     public static String getMacAddr() {
         try {
             List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
@@ -227,12 +232,15 @@ public class SignActivity extends AppCompatActivity {
         return "02:00:00:00:00:00";
     }
 
+
+    //just restarting the activity, but with param, that AlertDialog is disabled
     public void clearAll(View view) {
         Intent intent = new Intent(this, SignActivity.class);
         intent.putExtra("Info", "no");
         startActivity(intent);
     }
 
+    //method to come back to MainActivity
     public void backPressed(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

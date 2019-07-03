@@ -5,15 +5,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
 
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
-
-import cz.msebera.android.httpclient.Header;
 
 public class SendTask extends AsyncTask<Send, Void, Void> {
     static AsyncHttpClient client = new AsyncHttpClient(80);
@@ -33,9 +27,6 @@ public class SendTask extends AsyncTask<Send, Void, Void> {
 
 
         RequestParams params = new RequestParams();
-//        params.put("firstName", send.person.firstName);
-//        params.put("middleName", send.person.middleName);
-//        params.put("lastName", send.person.lastName);
         params.put("Place", send.place);
         params.put("IdDevice", send.IdDevice);
         try {
@@ -43,13 +34,14 @@ public class SendTask extends AsyncTask<Send, Void, Void> {
         } catch (FileNotFoundException e) {
             Log.e(TAG, "Name not found");
         }
-
         try {
             params.put("signature", send.person.signature);
         } catch (FileNotFoundException e) {
             Log.e(TAG, "Signature not found");
         }
 
+
+        //starting post request, it will be alive before server got this request, files will be deleted after that
         client.post(addr, params, new CustomAsyncHttpResponseHandler(client, addr, params, send.person.name, send.person.signature));
 
         return null;
