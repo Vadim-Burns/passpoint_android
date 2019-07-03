@@ -3,7 +3,8 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:paddingLeft="10sp"
-    android:paddingRight="10sp">
+    android:paddingRight="10sp"
+    android:paddingBottom="5sp">
 
     <RelativeLayout
         android:id="@+id/images_relative"
@@ -50,6 +51,7 @@
         android:layout_below="@id/rules_title"
         android:layout_above="@id/sign_activity_button"
         android:layout_marginTop="4dp"
+        android:paddingBottom="4.5sp"
         android:orientation="vertical" >
 
         <TextView
@@ -57,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:lineSpacingMultiplier="1.2"
             android:layout_marginLeft="6dp"
             android:text="@string/rules_rus"
             android:textSize="24sp"

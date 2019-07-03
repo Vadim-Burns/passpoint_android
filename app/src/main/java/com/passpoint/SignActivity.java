@@ -70,14 +70,18 @@ public class SignActivity extends AppCompatActivity {
 
             Button sendSign = (Button) findViewById(R.id.sendSign);
             sendSign.setText(getResources().getString(R.string.send_sign_rus));
+            sendSign.setTypeface(MainActivity.boldFont);
             Button back = (Button) findViewById(R.id.back_button);
             back.setText(getResources().getString(R.string.back_button_rus));
+            back.setTypeface(MainActivity.boldFont);
             ImageView clear_button = (ImageView) findViewById(R.id.clear_button);
             clear_button.setImageResource(R.drawable.clear_rus);
             TextView hintName = findViewById(R.id.hint_name);
             hintName.setText(getResources().getString(R.string.hint_name_rus));
+            hintName.setTypeface(MainActivity.smallFont);
             TextView hintSign = findViewById(R.id.hint_sign);
             hintSign.setText(getResources().getString(R.string.hint_sign_rus));
+            hintSign.setTypeface(MainActivity.smallFont);
 
             builder.setMessage(getResources().getString(R.string.hint_rus));
         } else {
@@ -86,14 +90,18 @@ public class SignActivity extends AppCompatActivity {
 
             Button sendSign = (Button) findViewById(R.id.sendSign);
             sendSign.setText(getResources().getString(R.string.send_sign_eng));
+            sendSign.setTypeface(MainActivity.boldFont);
             Button back = (Button) findViewById(R.id.back_button);
             back.setText(getResources().getString(R.string.back_button_eng));
+            back.setTypeface(MainActivity.boldFont);
             ImageView clear_button = (ImageView) findViewById(R.id.clear_button);
             clear_button.setImageResource(R.drawable.clear_eng);
             TextView hintName = findViewById(R.id.hint_name);
             hintName.setText(getResources().getString(R.string.hint_name_eng));
+            hintName.setTypeface(MainActivity.smallFont);
             TextView hintSign = findViewById(R.id.hint_sign);
             hintSign.setText(getResources().getString(R.string.hint_sign_eng));
+            hintSign.setTypeface(MainActivity.smallFont);
 
             builder.setMessage(getResources().getString(R.string.hint_eng));
         }
@@ -110,6 +118,7 @@ public class SignActivity extends AppCompatActivity {
             dialog.show();
             TextView textView = (TextView) dialog.findViewById(android.R.id.message);
             textView.setTextSize(24);
+            textView.setTypeface(MainActivity.smallFont);
         }
 
     }

@@ -1,8 +1,10 @@
 package com.passpoint;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -19,11 +21,16 @@ import android.widget.TextView;
 
 import com.passpoint.passpoint.R;
 
+import java.lang.reflect.Type;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private static String TAG = "MainLog";
     protected static String lang = "RU";
+    protected static Typeface boldFont;
+    protected static Typeface smallFont;
+    //Ru/ENG
 
 
     @Override
@@ -37,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
 
+        boldFont = Typeface.createFromAsset(getAssets(), "font/CirceBold.ttf");
+        smallFont = Typeface.createFromAsset(getAssets(), "font/CirceLight.ttf");
+
 
         //customize action bar
         ActionBar actionBar = getSupportActionBar();
@@ -48,19 +58,22 @@ public class MainActivity extends AppCompatActivity {
 //        actionBar.setBackgroundDrawable(new ColorDrawable(0xFF0000));
 
         TextView rules_title = (TextView) findViewById(R.id.rules_title);
+        rules_title.setTypeface(boldFont);
         TextView rules = (TextView) findViewById(R.id.rules_view);
+        rules.setTypeface(smallFont);
         Button button = (Button) findViewById(R.id.sign_activity_button);
+        button.setTypeface(boldFont);
         ImageView lang_button = (ImageView) findViewById(R.id.lang_button);
 
         if (lang == "RU") {
             lang_button.setImageResource(R.drawable.lang_ru);
-            rules_title.setText(getResources().getString(R.string.rules_title_rus));
-            rules.setText(getResources().getString(R.string.rules_rus));
+            rules_title.setText(getResources().getText(R.string.rules_title_rus));
+            rules.setText(getResources().getText(R.string.rules_rus));
             button.setText(getResources().getString(R.string.next_button_rus));
         } else {
             lang_button.setImageResource(R.drawable.lang_eng);
             rules_title.setText(getResources().getString(R.string.rules_title_eng));
-            rules.setText(getResources().getString(R.string.rules_eng));
+            rules.setText(getResources().getText(R.string.rules_eng));
             button.setText(getResources().getString(R.string.next_button_eng));
         }
 
@@ -90,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (lang == "RU") {
             TextView rules_textview = (TextView) findViewById(R.id.rules_view);
-            rules_textview.setText(getResources().getString(R.string.rules_eng));
+            rules_textview.setText(getResources().getText(R.string.rules_eng));
 
             TextView rules_title_textview = (TextView) findViewById(R.id.rules_title);
             rules_title_textview.setText(getResources().getString(R.string.rules_title_eng));
@@ -103,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             lang = "ENG";
         } else {
             TextView rules_textview = (TextView) findViewById(R.id.rules_view);
-            rules_textview.setText(getResources().getString(R.string.rules_rus));
+            rules_textview.setText(getResources().getText(R.string.rules_rus));
 
             TextView rules_title_textview = (TextView) findViewById(R.id.rules_title);
             rules_title_textview.setText(getResources().getString(R.string.rules_title_rus));

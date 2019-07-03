@@ -3,7 +3,8 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:paddingLeft="10sp"
-    android:paddingRight="10sp" >
+    android:paddingRight="10sp"
+    android:paddingBottom="6.5sp" >
 
     <RelativeLayout
         android:id="@+id/images_relative_sign"
@@ -23,10 +24,11 @@
 
         <ImageView
             android:id="@+id/clear_button"
-            android:layout_width="80sp"
+            android:layout_width="124sp"
             android:layout_height="50sp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="1sp"
             android:onClick="clearAll"/>
 
     </RelativeLayout>

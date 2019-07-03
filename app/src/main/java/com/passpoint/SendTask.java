@@ -16,9 +16,9 @@ import java.util.concurrent.TimeUnit;
 import cz.msebera.android.httpclient.Header;
 
 public class SendTask extends AsyncTask<Send, Void, Void> {
-    static AsyncHttpClient client = new AsyncHttpClient(8080);
+    static AsyncHttpClient client = new AsyncHttpClient(80);
     static String TAG = "SendLog";
-    static final String addr = "http://81.23.11.22/api/add_note";
+    static final String addr = "http://5.8.180.39/add_note";
 //    static final String addr = "http://5.8.180.39/api/add_note";
 
     @Override
