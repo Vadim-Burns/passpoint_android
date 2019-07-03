@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -12,24 +11,17 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.passpoint.passpoint.R;
 
-import java.io.File;
 import java.net.NetworkInterface;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -53,11 +45,6 @@ public class SignActivity extends AppCompatActivity {
         //customize action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-//        actionBar.setLogo(R.drawable.ic_action_croc);
-//        actionBar.setDisplayUseLogoEnabled(true);
-//        actionBar.setDisplayShowHomeEnabled(true);
-//        actionBar.setTitle("");
-//        actionBar.setBackgroundDrawable(new ColorDrawable(0xFF0000));
 
         //creating dialog window
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -65,8 +52,6 @@ public class SignActivity extends AppCompatActivity {
         //set language
         final String hint;
         if (MainActivity.lang == "RU") {
-//            EditText editText = (EditText) findViewById(R.id.name_edittext);
-//            editText.setHint(getResources().getString(R.string.name_rus));
 
             Button sendSign = (Button) findViewById(R.id.sendSign);
             sendSign.setText(getResources().getString(R.string.send_sign_rus));
@@ -85,8 +70,6 @@ public class SignActivity extends AppCompatActivity {
 
             builder.setMessage(getResources().getString(R.string.hint_rus));
         } else {
-//            EditText editText = (EditText) findViewById(R.id.name_edittext);
-//            editText.setHint(getResources().getString(R.string.name_eng));
 
             Button sendSign = (Button) findViewById(R.id.sendSign);
             sendSign.setText(getResources().getString(R.string.send_sign_eng));
@@ -195,6 +178,7 @@ public class SignActivity extends AppCompatActivity {
             if (MainActivity.lang == "RU") mes = getResources().getString(R.string.send_ok_rus);
             else mes = getResources().getString(R.string.send_ok_eng);
         }
+        Toast.makeText(this, mes, Toast.LENGTH_LONG).show();
 
 
         new Handler().postDelayed(new Runnable() {

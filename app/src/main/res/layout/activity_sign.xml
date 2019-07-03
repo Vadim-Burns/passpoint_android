@@ -28,7 +28,6 @@
             android:layout_height="50sp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="1sp"
             android:onClick="clearAll"/>
 
     </RelativeLayout>
