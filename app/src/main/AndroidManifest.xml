@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/croc"
@@ -13,14 +14,16 @@
         android:roundIcon="@mipmap/croc_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-    <activity android:name="com.passpoint.SignActivity" />
-        <activity android:name="com.passpoint.MainActivity">
+        <activity android:name="com.passpoint.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.passpoint.MainActivity"></activity>
+        <activity android:name="com.passpoint.SignActivity" />
     </application>
 
 </manifest>
